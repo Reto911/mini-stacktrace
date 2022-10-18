@@ -13,6 +13,7 @@ namespace mini_stacktrace {
     class StacktraceLinux {
         std::string result;
         const int size;
+        const int skip;
         void stacktrace() {
             char** symbols;
             void** stack = new void*[size]{nullptr};
@@ -20,8 +21,8 @@ namespace mini_stacktrace {
             int count = backtrace(stack, size);
             symbols = backtrace_symbols(stack, count);
 
-            for (int j = 2; j < count; j++) {  // Skip 2 frames: the Constructor and stacktrace().
-                sprintf(buffer, "[%02d] 0x%016lx+%s\n", j, (std::size_t) stack[j], symbols[j]);
+            for (int j = 2 + skip; j < count; j++) {  // Skip 2 frames: the Constructor and stacktrace().
+                sprintf(buffer, "[%02d] 0x%016lx+%s\n", j - 2 - skip, (std::size_t) stack[j], symbols[j]);
                 result.append(buffer);
             }
 
@@ -30,7 +31,7 @@ namespace mini_stacktrace {
         }
 
     public:
-        explicit StacktraceLinux(const int size=100) : size(size) {
+        explicit StacktraceLinux(const int skip=0, const int size=100) : size(size), skip(skip) {
             stacktrace();
         }
 
