@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.23)
 project(mini_stacktrace VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 20)
 
-set(CMAKE_INSTALL_PREFIX "D:/libs/mini-stacktrace")
-
 include(GNUInstallDirs)
 
 add_library(mini_stacktrace INTERFACE)
