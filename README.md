@@ -3,6 +3,7 @@ A lightweight, (maybe) cross-platform stacktrace library.
 
 The library supports:
 * Linux
+* Windows
 
 # Getting Started
 Mini-Stacktrace is a header-only library,
@@ -24,3 +25,8 @@ int main() {
     return 0;
 }
 ```
+
+## For Windows Users
+Because this library uses DbgHelp, the library will work properly with MSVC, but Mingw.
+
+If you want to use the library with Mingw, you must use [cv2pdb](https://github.com/rainers/cv2pdb) to generate a PDB file.
