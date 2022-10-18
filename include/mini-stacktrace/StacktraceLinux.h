@@ -24,6 +24,9 @@ namespace mini_stacktrace {
                 sprintf(buffer, "[%02d] 0x%016lx+%s\n", j, (std::size_t) stack[j], symbols[j]);
                 result.append(buffer);
             }
+
+            std::free(symbols);
+            delete[] stack;
         }
 
     public:
