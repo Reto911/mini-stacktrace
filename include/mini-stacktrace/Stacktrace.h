@@ -6,7 +6,7 @@
 #define MINI_STACKTRACE_STACKTRACE_H
 
 #ifdef __linux__
-#include "StacktraceLinux.h"
+#include "StacktraceLinux.hpp"
 
 namespace mini_stacktrace {
     using Stacktrace = StacktraceLinux;
@@ -14,7 +14,7 @@ namespace mini_stacktrace {
 
 #elif defined(__WIN32__)
 
-#include "StacktraceWindows.h"
+#include "StacktraceWindows.hpp"
 
 namespace mini_stacktrace {
     using Stacktrace = StacktraceWindows;

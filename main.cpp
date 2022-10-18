@@ -1,8 +1,8 @@
 #include <iostream>
-#include <mini-stacktrace/StacktraceLinux.h>
+#include <mini-stacktrace/mini-stacktrace>
 
 int main() {
-    std::cout << mini_stacktrace::StacktraceLinux() << std::endl;
+    std::cout << mini_stacktrace::Stacktrace() << std::endl;
 
     return 0;
 }

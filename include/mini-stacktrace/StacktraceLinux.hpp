@@ -2,8 +2,8 @@
 // Created by shiroan on 22-10-17.
 //
 
-#ifndef MINI_STACKTRACE_STACKTRACELINUX_H
-#define MINI_STACKTRACE_STACKTRACELINUX_H
+#ifndef MINI_STACKTRACE_STACKTRACELINUX_HPP
+#define MINI_STACKTRACE_STACKTRACELINUX_HPP
 
 #include <string>
 #include <cstdio>
@@ -49,4 +49,4 @@ namespace mini_stacktrace {
 static_assert(false, "Should not include this header.");
 #endif  // __linux__
 
-#endif //MINI_STACKTRACE_STACKTRACELINUX_H
+#endif //MINI_STACKTRACE_STACKTRACELINUX_HPP
