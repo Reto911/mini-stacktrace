@@ -1,0 +1,10 @@
+//
+// Created by shiroan on 22-10-18.
+//
+
+#ifndef MINI_STACKTRACE_MINI_STACKTRACE_
+#define MINI_STACKTRACE_MINI_STACKTRACE_
+
+#include "Stacktrace.h"
+
+#endif //MINI_STACKTRACE_MINI_STACKTRACE_

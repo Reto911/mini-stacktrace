@@ -6,9 +6,11 @@
 #define MINI_STACKTRACE_STACKTRACELINUX_H
 
 #include <string>
+#include <cstdio>
 #include <cstdint>
 #include <execinfo.h>
 
+#ifdef __linux__
 namespace mini_stacktrace {
     class StacktraceLinux {
         std::string result;
@@ -43,5 +45,8 @@ namespace mini_stacktrace {
     }
 
 }
+#else
+static_assert(false, "Should not include this header.");
+#endif  // __linux__
 
 #endif //MINI_STACKTRACE_STACKTRACELINUX_H
