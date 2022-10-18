@@ -5,12 +5,12 @@
 #ifndef MINI_STACKTRACE_STACKTRACELINUX_HPP
 #define MINI_STACKTRACE_STACKTRACELINUX_HPP
 
+#ifdef __linux__
 #include <string>
 #include <cstdio>
 #include <cstdint>
 #include <execinfo.h>
 
-#ifdef __linux__
 namespace mini_stacktrace {
     class StacktraceLinux {
         std::string result;

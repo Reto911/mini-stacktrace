@@ -11,7 +11,7 @@ and include header `mini-stacktrace` from the directory in your codes.
 
 Mini-Stacktrace is such a very simple library,
 that it just exposes one class `Stacktrace` as the only interface,
-and what you need to do (and can do) is to construct an instance of `Stacktrace` (which will capture the backtrace immediately)
+and what you need only to do (and can only do) is to construct an instance of `Stacktrace` (which will capture the backtrace immediately)
 and make it output to a stream.
 
 ```c++
@@ -19,7 +19,7 @@ and make it output to a stream.
 #include <mini-stacktrace/mini-stacktrace>
 
 int main() {
-    std::cout << mini_stacktrace::Stacktrace() << std::endl;  // 
+    std::cout << mini_stacktrace::Stacktrace() << std::endl;
 
     return 0;
 }

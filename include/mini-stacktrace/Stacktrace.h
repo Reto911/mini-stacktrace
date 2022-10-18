@@ -8,6 +8,8 @@
 namespace mini_stacktrace {
 template<typename ST>
 concept IsStacktrace = requires (ST trace, int size, int skip, std::ostream& os) {
+    ST();
+    ST(skip);
     ST(skip, size);
     os << trace;
 };
@@ -22,7 +24,7 @@ namespace mini_stacktrace {
     static_assert(IsStacktrace<Stacktrace>);
 }
 
-#elif defined(__WIN32__)
+#elif defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 
 #include "StacktraceWindows.hpp"
 
