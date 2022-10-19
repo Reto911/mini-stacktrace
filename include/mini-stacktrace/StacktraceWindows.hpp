@@ -11,14 +11,42 @@
 #include <ostream>
 
 namespace mini_stacktrace {
+#ifndef _MSC_VER
+    inline bool gen_pdb() {
+        CHAR path[MAX_PATH] = {0};
+        CHAR name[MAX_PATH]  = {0};
+        CHAR buf[MAX_PATH * 2 + 10] = {0};
+
+        DWORD len= GetModuleFileName(nullptr, path, 1024);
+        if (len == 0) {
+            return false;
+        }
+        PCHAR programName = path;
+
+        for (PCHAR i = programName; *i != 0; i++) {  // find the programName.
+            if (*i == '/' || *i == '\\') {
+                programName = i;
+            }
+        }
+        programName++;
+        strcpy(name, programName);
+        len -= (programName - path);  // get length of name
+
+        strcpy(name + len - 3, "pdb");  // replace *.exe with *.pdb
+
+        sprintf(buf, "cv2pdb %s nul %s", path, name);
+        system(buf);
+        return true;
+    }
+#endif
+
     class StacktraceWindows {
-        HANDLE processHandle;
-        HANDLE threadHandle;
+        HANDLE hProcess;
         const int size, skip;
         std::string result;
 
         void init_sym() {
-            SymInitialize(processHandle, nullptr, TRUE);
+            SymInitialize(hProcess, nullptr, TRUE);
         }
 
         void stack_trace() {
@@ -43,25 +71,30 @@ namespace mini_stacktrace {
                 PCSTR   fileName   = "??";
                 DWORD   lineNumber = 0;
 
-                if (SymFromAddr(processHandle, (DWORD64)frames[i], &symDisplament, pSym)) {
+                if (SymFromAddr(hProcess, (DWORD64)frames[i], &symDisplament, pSym)) {
                     address = pSym->Address;
                     name    = pSym->Name;
                 }
-                if (SymGetLineFromAddr(processHandle, (DWORD64)frames[i], &lineDisplament, &imageLine)) {
+                if (SymGetLineFromAddr(hProcess, (DWORD64)frames[i], &lineDisplament, &imageLine)) {
                     fileName   = imageLine.FileName;
                     lineNumber = imageLine.LineNumber;
                 }
                 sprintf(buf, "[%02d] %016llx+%s(FILE[%s]LINE[%lu])\n", i, address, name, fileName, lineNumber);
                 result.append(buf);
             }
+
+            delete[] frames;
         }
 
         void clean_up() {
-            SymCleanup(processHandle);
+            SymCleanup(hProcess);
         }
     public:
         explicit StacktraceWindows(const int skip=0, const int size=100)
-        : size(size), skip(skip), processHandle(GetCurrentProcess()), threadHandle(GetCurrentThread()) {
+        : size(size), skip(skip), hProcess(GetCurrentProcess()) {
+#ifndef _MSC_VER
+            gen_pdb();
+#endif
             init_sym();
             stack_trace();
             clean_up();
