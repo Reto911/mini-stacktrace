@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
 project(mini_stacktrace VERSION 0.1.0)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 14)
 
 include(GNUInstallDirs)
 
@@ -20,7 +20,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
             dbghelp
     )
 elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
-    target_compile_options(
+    target_link_options(
             mini_stacktrace
             INTERFACE
             -rdynamic
@@ -62,9 +62,5 @@ install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/mini-stacktrace DESTINATION include)
 
 add_executable(main main.cpp)
-
-if (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -rdynamic")
-endif()
 
 target_link_libraries(main mini_stacktrace)
