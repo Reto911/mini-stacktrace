@@ -5,7 +5,15 @@
 #ifndef MINI_STACKTRACE_STACKTRACE_H
 #define MINI_STACKTRACE_STACKTRACE_H
 
-#include <iostream>
+#ifdef DISABLE_MINI_STACKTRACE
+
+#include "StacktraceDisabled.hpp"
+
+namespace mini_stacktrace {
+    using Stacktrace = StacktraceDisabled;
+}
+
+#else
 
 #ifdef __linux__
 #include "StacktraceLinux.hpp"
@@ -23,5 +31,8 @@ namespace mini_stacktrace {
 }
 
 #endif // __linux__
+
+#endif // DISABLE_MINI_STACKTRACE
+
 
 #endif //MINI_STACKTRACE_STACKTRACE_H
