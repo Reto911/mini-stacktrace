@@ -61,5 +61,5 @@ install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
 
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/mini-stacktrace DESTINATION include)
 
-add_executable(main main.cpp)
-target_link_libraries(main mini_stacktrace)
+add_executable(mini_stacktrace_test main.cpp)
+target_link_libraries(mini_stacktrace_test mini_stacktrace)
