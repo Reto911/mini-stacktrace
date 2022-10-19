@@ -43,7 +43,7 @@ namespace mini_stacktrace {
     class StacktraceWindows {
         HANDLE hProcess;
         const int size, skip;
-        std::string result;
+        std::string result = "Stacktrace:\n";
 
         void init_sym() {
             SymInitialize(hProcess, nullptr, TRUE);
@@ -79,7 +79,7 @@ namespace mini_stacktrace {
                     fileName   = imageLine.FileName;
                     lineNumber = imageLine.LineNumber;
                 }
-                sprintf(buf, "[%02d] %016llx+%s(FILE[%s]LINE[%lu])\n", i, address, name, fileName, lineNumber);
+                sprintf(buf, "\t[%02d] %016llx+%s(FILE[%s]LINE[%lu])\n", i, address, name, fileName, lineNumber);
                 result.append(buf);
             }
 

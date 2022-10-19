@@ -13,7 +13,7 @@
 
 namespace mini_stacktrace {
     class StacktraceLinux {
-        std::string result;
+        std::string result = "Stacktrace:\n";
         const int size;
         const int skip;
         void stacktrace() {
@@ -24,7 +24,7 @@ namespace mini_stacktrace {
             symbols = backtrace_symbols(stack, count);
 
             for (int j = 2 + skip; j < count; j++) {  // Skip 2 frames: the Constructor and stacktrace().
-                sprintf(buffer, "[%02d] 0x%016lx+%s\n", j - 2 - skip, (std::size_t) stack[j], symbols[j]);
+                sprintf(buffer, "\t[%02d] 0x%016lx+%s\n", j - 2 - skip, (std::size_t) stack[j], symbols[j]);
                 result.append(buffer);
             }
 
