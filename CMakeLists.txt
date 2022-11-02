@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
-project(mini_stacktrace VERSION 0.1.0)
+project(mini_stacktrace VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 14)
 
 include(GNUInstallDirs)
@@ -60,6 +60,3 @@ install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
 )
 
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/mini-stacktrace DESTINATION include)
-
-add_executable(mini_stacktrace_test main.cpp)
-target_link_libraries(mini_stacktrace_test mini_stacktrace)

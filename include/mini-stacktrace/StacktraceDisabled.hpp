@@ -10,12 +10,12 @@
 namespace mini_stacktrace {
     class StacktraceDisabled {
     public:
-        friend std::ostream &operator<<(std::ostream &os, const StacktraceDisabled &disabled);
+        friend std::ostream &operator<<(std::ostream &os, const StacktraceDisabled &);
 
         explicit StacktraceDisabled(const int=0, const int=0) {}
     };
 
-    std::ostream &operator<<(std::ostream &os, const StacktraceDisabled &disabled) {
+    std::ostream &operator<<(std::ostream &os, const StacktraceDisabled &) {
         return os;
     }
 }

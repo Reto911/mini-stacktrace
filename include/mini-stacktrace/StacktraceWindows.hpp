@@ -91,7 +91,7 @@ namespace mini_stacktrace {
         }
     public:
         explicit StacktraceWindows(const int skip=0, const int size=100)
-        : size(size), skip(skip), hProcess(GetCurrentProcess()) {
+        : hProcess(GetCurrentProcess()), size(size), skip(skip) {
 #ifndef _MSC_VER
             gen_pdb();
 #endif
